@@ -1,0 +1,31 @@
+name: Deployment
+
+on:
+  workflow_dispatch:
+
+defaults:
+  run:
+    shell: bash -leo pipefail {0}
+
+jobs:
+  pre-deployment:
+    name: Pre Deployment
+    runs-on: lightsail-prd
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          path: nport
+
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          path: localtunnel
+          repository: localtunnel/server
+
+      - name: Install dependencies
+        working-directory: localtunnel
+        run: npm install
+
+      - name: Move source
+        run: sudo rm -rf /home/bitnami/nport-server && sudo mv nport /home/bitnami/nport-server
