@@ -1,0 +1,15 @@
+[Unit]
+Description=Nport - Net Port Link
+After=network.target
+
+[Service]
+ExecStart=/opt/bitnami/node/bin/node /opt/bitnami/nport-server/bin/server --port 3000
+WorkingDirectory=/opt/bitnami/nport-server
+Restart=always
+User=bitnami
+Group=bitnami
+Environment=PATH=/opt/bitnami/node/bin:/usr/bin:/bin
+Environment=NODE_ENV=production
+
+[Install]
+WantedBy=multi-user.target

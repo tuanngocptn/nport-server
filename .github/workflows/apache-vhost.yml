@@ -2,9 +2,6 @@ name: Sync Apache Vhost
 
 on:
   workflow_dispatch:
-  repository_dispatch:
-    types:
-      - sync-apache-vhost
   push:
     branches:
       - main

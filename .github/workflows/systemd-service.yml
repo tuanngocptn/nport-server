@@ -1,0 +1,31 @@
+name: Sync Systemd Service
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/etc/systemd/system/**
+
+defaults:
+  run:
+    shell: bash -leo pipefail {0}
+
+jobs:
+  sync-apache-vhost:
+    name: Sync Systemd Service
+    runs-on: lightsail-prd
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Set service
+        run: |
+          rm -rf /etc/systemd/system/nport.service
+          cp -R .github/etc/systemd/system/nport.service /etc/systemd/system/
+          # sudo systemctl daemon-reload
+          # sudo systemctl start nport
+          # sudo systemctl restart nport

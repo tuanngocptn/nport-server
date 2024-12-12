@@ -2,9 +2,6 @@ name: Sync Apache Certs
 
 on:
   workflow_dispatch:
-  repository_dispatch:
-    types:
-      - sync-apache-certs
   push:
     branches:
       - main
