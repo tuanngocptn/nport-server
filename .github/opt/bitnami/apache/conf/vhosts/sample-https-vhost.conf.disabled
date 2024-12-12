@@ -2,8 +2,8 @@
   ServerName www.example.com
   ServerAlias *
   SSLEngine on
-  SSLCertificateFile "/opt/bitnami/apache/conf/certs/nport.link.crt"
-  SSLCertificateKeyFile "/opt/bitnami/apache/conf/certs/nport.link.key"
+  SSLCertificateFile "/opt/bitnami/apache/conf/bitnami/certs/server.crt"
+  SSLCertificateKeyFile "/opt/bitnami/apache/conf/bitnami/certs/server.key"
   DocumentRoot /opt/bitnami/projects/sample
   <Directory "/opt/bitnami/projects/sample">
     Options -Indexes +FollowSymLinks -MultiViews
