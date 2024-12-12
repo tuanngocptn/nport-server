@@ -26,4 +26,5 @@ jobs:
         run: |
           rm -rf /opt/bitnami/apache/conf/vhosts
           cp -R .github/opt/bitnami/apache/conf/vhosts /opt/bitnami/apache/conf/
+          # sudo /opt/bitnami/ctlscript.sh restart apache
           sudo /opt/bitnami/ctlscript.sh restart
