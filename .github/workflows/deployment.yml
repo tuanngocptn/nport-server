@@ -15,7 +15,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          path: nport 
+          path: nport
 
       - name: Checkout
         uses: actions/checkout@v4
@@ -29,3 +29,6 @@ jobs:
 
       - name: Move source
         run: sudo rm -rf /home/bitnami/nport-server && sudo mv localtunnel /home/bitnami/nport-server
+
+      - name: Restart service
+        run: sudo systemctl restart nport
