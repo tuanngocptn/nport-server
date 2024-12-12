@@ -1,0 +1,56 @@
+name: Run Cloudflare Update IPs
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: 0 1 * * *
+
+defaults:
+  run:
+    shell: bash -leo pipefail {0}
+
+permissions:
+  contents: write
+
+jobs:
+  cloudflare:
+    name: Check CloudFlare IPS
+    runs-on: lightsail-prd
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run fetch cloudflare IPs
+        run: bash .github/scripts/cloudflare.sh
+
+      - name: Check git diff-index for changes
+        continue-on-error: true
+        id: git_diff
+        run: |
+          if [[ -n $(git status --porcelain) ]]; then
+            echo "value=true" >> $GITHUB_OUTPUT
+          else
+            echo "value=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Changes detected
+        if: steps.git_diff.outputs.value == 'true'
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m ':white_check_mark: Backup vhost'
+          git push origin main
+
+      - name: Trigger change Vhost
+        uses: fjogeleit/http-request-action@v1
+        if: steps.git_diff.outputs.value == 'true'
+        with:
+          url: "https://api.github.com/repos/${{ github.repository }}/dispatches"
+          method: "POST"
+          customHeaders: '{"Accept": "application/vnd.github+json", "Authorization": "Bearer ${{ secrets.GH_PAT }}", "X-GitHub-Api-Version": "2022-11-28"}'
+          data: '{"event_type": "sync-apache-vhost"}'
+
+      - name: No changes detected
+        if: steps.git_diff.outputs.value == 'false'
+        run: echo "No changes detected in the working directory."

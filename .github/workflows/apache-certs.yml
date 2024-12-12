@@ -1,0 +1,31 @@
+name: Sync Apache Certs
+
+on:
+  workflow_dispatch:
+  repository_dispatch:
+    types:
+      - sync-apache-certs
+  push:
+    branches:
+      - main
+    paths:
+      - .github/opt/bitnami/apache/conf/certs/**
+
+defaults:
+  run:
+    shell: bash -leo pipefail {0}
+
+jobs:
+  sync-apache-certs:
+    name: Sync Apache Certs
+    runs-on: lightsail-prd
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Set certs
+        run: |
+          rm -rf /opt/bitnami/apache/conf/certs
+          cp -R .github/opt/bitnami/apache/conf/certs /opt/bitnami/apache/conf/

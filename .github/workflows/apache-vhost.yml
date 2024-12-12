@@ -1,0 +1,32 @@
+name: Sync Apache Vhost
+
+on:
+  workflow_dispatch:
+  repository_dispatch:
+    types:
+      - sync-apache-vhost
+  push:
+    branches:
+      - main
+    paths:
+      - .github/opt/bitnami/apache/conf/vhosts/**
+
+defaults:
+  run:
+    shell: bash -leo pipefail {0}
+
+jobs:
+  sync-apache-vhost:
+    name: Sync Apache Vhost
+    runs-on: lightsail-prd
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Set vhost
+        run: |
+          rm -rf /opt/bitnami/apache/conf/vhosts
+          cp -R .github/opt/bitnami/apache/conf/vhosts /opt/bitnami/apache/conf/
+          sudo /opt/bitnami/ctlscript.sh restart
