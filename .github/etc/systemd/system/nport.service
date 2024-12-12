@@ -3,8 +3,8 @@ Description=Nport - Net Port Link
 After=network.target
 
 [Service]
-ExecStart=/opt/bitnami/node/bin/node /opt/bitnami/nport-server/bin/server --port 3000
-WorkingDirectory=/opt/bitnami/nport-server
+ExecStart=/opt/bitnami/node/bin/node -r esm bin/server --port 3000
+WorkingDirectory=/home/bitnami/nport-server
 Restart=always
 User=bitnami
 Group=bitnami

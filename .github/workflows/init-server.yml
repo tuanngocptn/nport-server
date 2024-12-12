@@ -15,10 +15,10 @@ jobs:
     runs-on: lightsail-prd
     steps:
       - name: Install support libs
-        run: | 
+        run: |
           sudo apt install git -y
           sudo apt install jq -y
-          
+
       - name: Install Node v10
         run: |
           sudo mv /opt/bitnami/node /opt/bitnami/node_bk
@@ -27,3 +27,6 @@ jobs:
           sudo mv node-v10.24.1-linux-x64 /opt/bitnami/node
           node -v
           npm -v
+
+      - name: Install esm
+        run: npm install -g esm
