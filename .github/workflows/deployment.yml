@@ -26,7 +26,8 @@ jobs:
           repository: localtunnel/server
 
       - name: Install dependencies
-        working-directory: socket-tunnel
+        # working-directory: socket-tunnel
+        working-directory: localtunnel
         run: npm install
 
       - name: Move source
