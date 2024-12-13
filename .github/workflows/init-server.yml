@@ -14,6 +14,9 @@ jobs:
   init-server:
     runs-on: lightsail-prd
     steps:
+      - name: Update apt
+        run: sudo apt update -y
+
       - name: Install git
         run: sudo apt install git -y
 
