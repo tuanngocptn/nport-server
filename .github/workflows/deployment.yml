@@ -21,7 +21,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           path: socket-tunnel
-          repository: ericbarch/socket-tunnel
+          repository: tuanngocptn/socket-tunnel
 
       - name: Install dependencies
         working-directory: socket-tunnel
