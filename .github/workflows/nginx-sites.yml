@@ -24,8 +24,8 @@ jobs:
 
       - name: Set sites
         run: |
-          sudo rm -rf etc/nginx/sites-available/*
+          sudo rm -rf etc/nginx/sites-available
           sudo rm -rf etc/nginx/sites-enabled/*
-          sudo cp -R .github/etc/nginx/sites-available/* etc/nginx/sites-available/
+          sudo cp -R .github/etc/nginx/sites-available etc/nginx/sites-available
           sudo ln -s etc/nginx/sites-available/* etc/nginx/sites-enabled/
           sudo systemctl restart nginx
