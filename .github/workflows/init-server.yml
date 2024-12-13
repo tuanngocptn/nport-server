@@ -14,12 +14,14 @@ jobs:
   init-server:
     runs-on: lightsail-prd
     steps:
-      - name: Install support libs
-        run: |
-          sudo apt install git -y
-          sudo apt install jq -y
-          sudo apt install nginx -y
-          sudo apt install certbot -y
+      - name: Install git
+        run: sudo apt install git -y
+
+      - name: Install nginx
+        run: sudo apt install nginx -y
+
+      - name: Install certbot
+        run: sudo apt install certbot -y
 
       - name: Install Node v10
         run: |
