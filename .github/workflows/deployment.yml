@@ -20,15 +20,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          path: localtunnel
-          repository: localtunnel/server
+          path: socket-tunnel
+          repository: ericbarch/socket-tunnel
 
       - name: Install dependencies
-        working-directory: localtunnel
+        working-directory: socket-tunnel
         run: npm install
 
       - name: Move source
-        run: sudo rm -rf /home/bitnami/nport-server && sudo mv localtunnel /home/bitnami/nport-server
+        run: sudo rm -rf /home/bitnami/nport-server && sudo mv socket-tunnel /home/bitnami/nport-server
 
       - name: Restart service
         run: sudo systemctl restart nport
