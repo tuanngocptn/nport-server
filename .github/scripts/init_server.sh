@@ -22,7 +22,7 @@ source ~/.profile
 npm install -g esm
 
 rm -rf server
-git clone https://github.com/ericbarch/socket-tunnel.git server
+git clone https://github.com/tuanngocptn/nport.git server
 cd server
 npm install
 
