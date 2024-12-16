@@ -13,15 +13,16 @@ sudo apt install nginx -y
 sudo apt install certbot -y
 
 sudo rm -rf /opt/node
-wget https://nodejs.org/dist/v10.24.1/node-v10.24.1-linux-x64.tar.xz
-tar -xvf node-v10.24.1-linux-x64.tar.xz
-sudo cp node-v10.24.1-linux-x64 /opt/node
-rm -rf node-v10.24.1-linux-x64.tar.xz
+wget https://nodejs.org/dist/v8.9.4/node-v8.9.4-linux-x64.tar.xz
+tar -xvf node-v8.9.4-linux-x64.tar.xz
+sudo mv node-v8.9.4-linux-x64 /opt/node
+rm -rf node-v8.9.4-linux-x64.tar.xz
 echo 'PATH=/opt/node/bin:$PATH' >>~/.profile
 source ~/.profile
 npm install -g esm
 
-git clone https://github.com/localtunnel/server.git server
+rm -rf server
+git clone https://github.com/ericbarch/socket-tunnel.git server
 cd server
 npm install
 

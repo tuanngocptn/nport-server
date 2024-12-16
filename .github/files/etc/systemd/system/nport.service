@@ -3,7 +3,7 @@ Description=Nport - Net Port Link
 After=network.target
 
 [Service]
-ExecStart=/opt/node/bin/node -r esm bin/server --port 3000
+ExecStart=/opt/node/bin/node bin/server --port 3000
 WorkingDirectory=/home/ubuntu/server
 Restart=always
 User=ubuntu
