@@ -40,7 +40,7 @@ sudo apt install python3-pip -y
 sudo apt install python3-certbot-dns-cloudflare -y
 pip install certbot-dns-cloudflare
 chmod 600 /home/ubuntu/.secrets/credentials.ini
-sudo certbot certonly --dns-cloudflare --dns-cloudflare-credentials /home/ubuntu/.secrets/credentials.ini --server https://acme-v02.api.letsencrypt.org/directory --preferred-challenges dns -d '*.nport.link' -d 'nport.link' --non-interactive --agree-tos -m tuanngocptn@gmail.com
+sudo certbot certonly --dns-cloudflare --dns-cloudflare-credentials /home/ubuntu/.secrets/credentials.ini --server https://acme-v02.api.letsencrypt.org/directory --preferred-challenges dns -d '*.nport.link' --non-interactive --agree-tos -m tuanngocptn@gmail.com
 
 sudo rm -rf /etc/nginx/sites-available/*
 sudo rm -rf /etc/nginx/sites-enabled/*
